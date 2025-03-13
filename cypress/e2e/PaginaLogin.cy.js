@@ -1,36 +1,51 @@
-//const { should } = require("chai")
+describe('Testes Página de Login', () => {
 
-describe('Testes Pagina de Login', () => {
+  beforeEach(() => {
+    cy.acessarLogin()
+  })
+
   it('Deve logar com sucesso', () => {
-    cy.visit('https://practicetestautomation.com/practice-test-login/')
+    cy.fazerLogin('student', 'Password123')
 
-    cy.get('#username').type('student')
-    cy.get('#password').type('Password123')
-    cy.get('#submit').click()
-    cy.get('.post-title')
-      .should('be.visible').and('have.text', 'Logged In Successfully')
-    cy.get('strong')
-      .should('be.visible').and('have.text', 'Congratulations student. You successfully logged in!')
-    cy.get('.wp-block-button__link').click()
+    cy.validarMensagem('.post-title', 'Logged In Successfully')
+    cy.validarMensagem('strong', 'Congratulations student. You successfully logged in!')
+
+    cy.logout()
   })
 
   it('Nome de Usuário Incorreto', () => {
-    cy.visit('https://practicetestautomation.com/practice-test-login/')
+    cy.fazerLogin('usuarioIncorreto', 'Password123')
 
-    cy.get('#username').type('usuarioIncorreto')
-    cy.get('#password').type('Password123')
-    cy.get('#submit').click()
-    cy.get('#error')
-      .should('be.visible').and('have.text', 'Your username is invalid!')
+    cy.validarMensagem('#error', 'Your username is invalid!')
   })
 
   it('Senha Incorreta', () => {
-    cy.visit('https://practicetestautomation.com/practice-test-login/')
+    cy.fazerLogin('student', 'senhaIncorreta')
 
-    cy.get('#username').type('student')
-    cy.get('#password').type('senhaIncorreta')
-    cy.get('#submit').click()
-    cy.get('#error')
-      .should('be.visible').and('have.text', 'Your password is invalid!')
+    cy.validarMensagem('#error', 'Your password is invalid!')
   })
+})
+
+// Visitar página de Login
+Cypress.Commands.add('acessarLogin', () => {
+  cy.visit('https://practicetestautomation.com/practice-test-login/')
+})
+
+// Preencher e submeter formulário de login
+Cypress.Commands.add('fazerLogin', (usuario, senha) => {
+  cy.get('#username').type(usuario)
+  cy.get('#password').type(senha)
+  cy.get('#submit').click()
+})
+
+// Validar mensagens de sucesso e erro
+Cypress.Commands.add('validarMensagem', (seletor, mensagem) => {
+  cy.get(seletor)
+    .should('be.visible')
+    .and('have.text', mensagem)
+})
+
+// Logout
+Cypress.Commands.add('logout', () => {
+  cy.get('.wp-block-button__link').click()
 })
