@@ -6,7 +6,7 @@
     "start": "npx http-server -p 3000",
     "cy:run": "wait-on http://localhost:3000 && cypress run",
     "cy:run-allure": "cypress run --env allure=true",
-    "allure:generate": "allure generate allure-results --clean",
+    "allure:generate": "./node_modules/.bin/allure generate allure-results --clean",
     "allure:open": "allure open"
   },
   "keywords": [],
