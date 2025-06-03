@@ -8,6 +8,9 @@ module.exports = defineConfig({
 
     baseUrl: 'https://practicetestautomation.com/practice-test-login/',
     viewportWidth: 1920,
-    viewportHeight: 1080
+    viewportHeight: 1080,
+    env: {
+      password: 'Password123'
+    }
   },
 });

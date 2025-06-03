@@ -1,0 +1,38 @@
+name: Pipeline com Cypress
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+
+      - name: Upload de screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: cypress/screenshots
+
+      - name: Upload de vídeos
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos
+          path: cypress/videos
+

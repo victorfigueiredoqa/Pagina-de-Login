@@ -5,7 +5,7 @@ describe('Testes Página de Login', () => {
   })
 
   it('Deve logar com sucesso', () => {
-    cy.fazerLogin('student', 'Password123')
+    cy.fazerLogin('student', Cypress.env('password'))
 
     cy.validarMensagem('.post-title', 'Logged In Successfully')
     cy.validarMensagem('strong', 'Congratulations student. You successfully logged in!')
@@ -14,7 +14,7 @@ describe('Testes Página de Login', () => {
   })
 
   it('Nome de Usuário Incorreto', () => {
-    cy.fazerLogin('usuarioIncorreto', 'Password123')
+    cy.fazerLogin('usuarioIncorreto', Cypress.env('password'))
 
     cy.validarMensagem('#error', 'Your username is invalid!')
   })
