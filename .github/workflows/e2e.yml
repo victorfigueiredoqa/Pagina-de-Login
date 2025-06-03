@@ -1,11 +1,10 @@
-name: Executa o teste cypress e publica o relatorio Allure
-  
+name: Executa os testes em Cypress e publica o relatorio do Allure
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
   workflow_dispatch:
 
 permissions:
@@ -22,40 +21,25 @@ jobs:
       - name: Configurar Node.js via .nvmrc
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        id: npm-cache
-        with:
-          path: ~/.npm 
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
+          node-version-file: ".nvmrc"
 
       - name: Instalar dependências
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm install 
 
       - name: Rodar testes Cypress com Allure
         
-        run: npm run cy:run-allure
-        
+        run: npm run cy:run-allure 
         continue-on-error: true
 
       - name: Gerar Relatório Allure
         
-        run: npm run allure:generate
-        
-        if: always()
+        run: npm run allure:generate 
+        if: always() # Roda sempre, mesmo se o passo anterior falhar
 
       - name: Deploy Allure Report to GitHub Pages
-        
         uses: peaceiris/actions-gh-pages@v3
-        
-        if: always()
+        if: always() # Roda sempre
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
+          publish_dir: ./allure-report 
           keep_files: true
