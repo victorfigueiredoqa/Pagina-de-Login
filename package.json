@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "npx http-server -p 3000",
-    "cy:run": "wait-on http://localhost:3000 && cypress run"
+    "cy:run": "wait-on http://localhost:3000 && cypress run",
+    "cy:run-allure": "cypress run --env allure=true",
+    "allure:generate": "allure generate allure-results --clean",
+    "allure:open": "allure open"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +15,8 @@
   "description": "",
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "allure-commandline": "^2.34.0",
     "cypress": "^14.2.0",
     "http-server": "^14.1.1",
     "wait-on": "^8.0.3"
