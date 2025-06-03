@@ -8,6 +8,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -43,7 +46,5 @@ jobs:
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          
           publish_dir: ./allure-report
-         
           keep_files: true
