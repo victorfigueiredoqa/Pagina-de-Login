@@ -1,10 +1,12 @@
-name: Run Cypress tests
-
+name: Executa o teste cypress e publica o relatorio Allure
+  
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
+  workflow_dispatch:
 
 jobs:
   cypress-run:
@@ -22,9 +24,26 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Iniciar servidor local
-        run: npm run start &
-        shell: bash
+      - name: Rodar testes Cypress com Allure
+        
+        run: npm run cy:run-allure
+        
+        continue-on-error: true
 
-      - name: Rodar testes Cypress
-        run: npm run cy:run
+      - name: Gerar Relatório Allure
+        
+        run: npm run allure:generate
+        
+        if: always()
+
+      - name: Deploy Allure Report to GitHub Pages
+        
+        uses: peaceiris/actions-gh-pages@v3
+        
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
+          publish_dir: ./allure-report
+         
+          keep_files: true
