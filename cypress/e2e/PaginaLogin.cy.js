@@ -1,10 +1,11 @@
 describe('Testes Página de Login', () => {
 
+  // Executar antes...
   beforeEach(() => {
     cy.acessarLogin()
   })
 
-  it('Deve logar com sucesso', () => {
+  it('Deve fazer login com sucesso', () => {
     cy.fazerLogin('student', Cypress.env('password'))
 
     cy.validarMensagem('.post-title', 'Logged In Successfully')
