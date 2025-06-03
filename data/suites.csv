@@ -1,4 +1,4 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","5014","Nome de Usuário Incorreto","","Tue Jun 03 08:32:41 GMT-03:00 2025","passed","Tue Jun 03 08:32:46 GMT-03:00 2025","","Testes Página de Login","",""
-"","7090","Deve logar com sucesso","","Tue Jun 03 08:32:33 GMT-03:00 2025","failed","Tue Jun 03 08:32:40 GMT-03:00 2025","","Testes Página de Login","",""
-"","3667","Senha Incorreta","","Tue Jun 03 08:32:46 GMT-03:00 2025","passed","Tue Jun 03 08:32:50 GMT-03:00 2025","","Testes Página de Login","",""
+"","3673","Nome de Usuário Incorreto","","Tue Jun 03 15:57:31 UTC 2025","passed","Tue Jun 03 15:57:34 UTC 2025","","Testes Página de Login","",""
+"","3007","Senha Incorreta","","Tue Jun 03 15:57:34 UTC 2025","passed","Tue Jun 03 15:57:37 UTC 2025","","Testes Página de Login","",""
+"","2427","Deve logar com sucesso","","Tue Jun 03 15:57:28 UTC 2025","passed","Tue Jun 03 15:57:31 UTC 2025","","Testes Página de Login","",""
